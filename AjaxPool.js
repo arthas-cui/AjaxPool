@@ -26,6 +26,7 @@
                         (function () {
                             var backNext = nextConfig;
                             var backSuccess = success;
+                            // maybe should use complete???
                             currentConfig.success = function () {
                                 backSuccess.apply(this, Array.prototype.slice.call(arguments));
                                 $.ajax(backNext);
