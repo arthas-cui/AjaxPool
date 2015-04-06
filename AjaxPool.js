@@ -13,10 +13,17 @@
                 return this;
             },
             exec: function () {
+                if(pool.length  == 0){
+                    return;
+                }
+                if(pool.length == 1){
+                    $.ajax(pool.shift());
+                    return;
+                }
                 var firstConfig;
                 var currentConfig;
-                currentConfig = firstConfig = pool.pop();
-                var nextConfig = pool.pop();
+                currentConfig = firstConfig = pool.shift();
+                var nextConfig = pool.shift();
                 while (currentConfig) {
                     var success = currentConfig.success;
                     
@@ -34,7 +41,7 @@
                         })();
                     }
                     currentConfig = nextConfig;
-                    nextConfig = pool.pop();
+                    nextConfig = pool.shift();
                 }
                 $.ajax(firstConfig);
             }
